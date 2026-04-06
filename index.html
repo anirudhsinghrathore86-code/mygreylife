@@ -1,224 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevLab | Portfolio & Journal</title>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        :root {
-            --bg: #08090a;
-            --card: #111418;
-            --accent: #00f2ff;
-            --accent-soft: rgba(0, 242, 255, 0.1);
-            --text: #f8fafc;
-            --text-dim: #94a3b8;
-            --border: rgba(255, 255, 255, 0.08);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>anrdh86 — portfolio</title>
 
-        * { box-sizing: border-box; transition: all 0.2s ease; }
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            line-height: 1.6;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 
-        /* --- NAVIGATION --- */
-        nav {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(17, 20, 24, 0.8);
-            backdrop-filter: blur(12px);
-            padding: 8px 24px;
-            border-radius: 40px;
-            border: 1px solid var(--border);
-            display: flex;
-            gap: 24px;
-            z-index: 1000;
-        }
+<style>
+body {
+  background:#000;
+  color:#fff;
+  font-family:'JetBrains Mono', monospace;
+  margin:0;
+}
 
-        nav a {
-            color: var(--text-dim);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-        }
+/* NAV */
+nav {
+  display:flex;
+  gap:20px;
+  padding:15px;
+  border-bottom:1px solid #222;
+}
+nav button {
+  background:none;
+  border:none;
+  color:#888;
+  cursor:pointer;
+}
+nav button.active { color:#fff; }
 
-        nav a:hover, nav a.active { color: var(--accent); }
+/* PAGES */
+.page { display:none; padding:20px; }
+.page.active { display:block; }
 
-        /* --- LAYOUT --- */
-        .container {
-            max-width: 1100px;
-            margin: 100px auto;
-            padding: 0 20px;
-        }
+/* BLOG */
+.blog-post {
+  border-bottom:1px solid #222;
+  padding:15px 0;
+}
+button { cursor:pointer; }
 
-        section { margin-bottom: 80px; display: none; animation: fadeIn 0.5s ease forwards; }
-        section.active { display: block; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- BENTO GRID --- */
-        .bento {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: 200px;
-            gap: 16px;
-        }
-
-        .tile {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 28px;
-            padding: 24px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .tile:hover { border-color: var(--accent); background: #161a20; }
-
-        .span-2 { grid-column: span 2; }
-        .row-2 { grid-row: span 2; }
-
-        /* --- COMPONENTS --- */
-        .badge {
-            background: var(--accent-soft);
-            color: var(--accent);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            width: fit-content;
-        }
-
-        .btn-launch {
-            margin-top: 15px;
-            background: var(--accent);
-            color: black;
-            padding: 10px 20px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .post-preview {
-            border-bottom: 1px solid var(--border);
-            padding: 20px 0;
-            cursor: pointer;
-        }
-
-        .post-preview:hover h3 { color: var(--accent); }
-
-        /* --- UTILS --- */
-        .muted { color: var(--text-dim); font-size: 14px; }
-        h1 { font-size: 3rem; margin: 0; }
-    </style>
+/* GOD MODE */
+body.god-mode [data-editable] {
+  outline:1px dashed #555;
+}
+.delete-btn {
+  margin-left:10px;
+  color:red;
+  cursor:pointer;
+}
+</style>
 </head>
+
 <body>
 
-    <nav id="main-nav">
-        <a href="#home" class="active" onclick="showSection('home')">Home</a>
-        <a href="#projects" onclick="showSection('projects')">Projects</a>
-        <a href="#blog" onclick="showSection('blog')">Writing</a>
-    </nav>
+<nav>
+  <button onclick="showPage('home')" class="active">Home</button>
+  <button onclick="showPage('blog')">Blog</button>
+  <button onclick="showPage('projects')">Projects</button>
+  <button onclick="logout()">Logout</button>
+</nav>
 
-    <div class="container">
-        
-        <section id="home" class="active">
-            <div class="bento">
-                <div class="tile span-2 row-2" style="justify-content: center;">
-                    <span class="badge">Available for Projects</span>
-                    <h1>I build digital tools.</h1>
-                    <p class="muted">Student by day, developer by night. Obsessed with web performance, AI automation, and solving the "Physics Homework" paradox.</p>
-                </div>
+<!-- HOME -->
+<div id="home" class="page active">
+  <h1 data-editable>Anirudh</h1>
+  <p data-editable>builder of things.</p>
+</div>
 
-                <div class="tile span-2" style="background: linear-gradient(45deg, #111418, #1a1a2e);">
-                    <h3>Featured: Config-Engine</h3>
-                    <p class="muted">The AI-powered QA farm for game devs.</p>
-                    <a href="#projects" onclick="showSection('projects')" class="btn-launch">Explore MVP</a>
-                </div>
+<!-- BLOG -->
+<div id="blog" class="page">
 
-                <div class="tile">
-                    <i data-lucide="code-2" style="color: var(--accent);"></i>
-                    <h3>Tech Stack</h3>
-                    <p class="muted">React, Next.js, Python, & Tailwind.</p>
-                </div>
+  <!-- Unlock -->
+  <input id="pass" placeholder="enter passcode">
+  <button onclick="unlock()">Unlock</button>
 
-                <div class="tile">
-                    <i data-lucide="book-open" style="color: #a855f7;"></i>
-                    <h3>Blog</h3>
-                    <p class="muted">Thoughts on life and code.</p>
-                </div>
-            </div>
-        </section>
+  <!-- Create -->
+  <div id="createBox" style="display:none;">
+    <input id="title" placeholder="title"><br><br>
+    <textarea id="body" placeholder="write..."></textarea><br>
+    <label><input type="checkbox" id="private"> Private</label><br>
+    <button onclick="addPost()">Post</button>
+  </div>
 
-        <section id="projects">
-            <h2 style="font-size: 2rem;">The Lab</h2>
-            <p class="muted" style="margin-bottom: 40px;">Interactive MVPs and experiments.</p>
+  <!-- Toggle -->
+  <button onclick="togglePrivate()">Toggle Private</button>
 
-            <div class="tile span-2 row-2" style="width: 100%; margin-bottom: 20px; height: 500px;">
-                <div style="display: flex; justify-content: space-between;">
-                    <span class="badge">LIVE MVP</span>
-                    <h3>CONFIG-ENGINE v0.1</h3>
-                </div>
-                <div style="flex: 1; background: #000; margin: 20px 0; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px dashed #333;">
-                    <p class="muted">[ Interactive Config-Engine Demo Loaded Here ]</p>
-                </div>
-                <p class="muted">Testing bots currently simulating 'Project Velocity'. Found 3 critical leaks.</p>
-            </div>
+  <div id="posts"></div>
 
-            <div class="bento">
-                <div class="tile span-2">
-                    <h3>Petal Media</h3>
-                    <p class="muted">A personalized landing page service. Helping people celebrate life events through code.</p>
-                </div>
-            </div>
-        </section>
+</div>
 
-        <section id="blog">
-            <h2 style="font-size: 2rem;">Journal</h2>
-            <div class="post-preview">
-                <span class="muted">April 2026</span>
-                <h3>The Physics Manifesto: Why Classroom Science feels Broken</h3>
-                <p class="muted">Analyzing the disconnect between theoretical physics coursework and the practical beauty of game engine physics.</p>
-            </div>
-            <div class="post-preview">
-                <span class="muted">March 2026</span>
-                <h3>Building 'Config-Engine' with AI Agents</h3>
-                <p class="muted">How I used reinforcement learning concepts to automate playtesting.</p>
-            </div>
-        </section>
+<!-- PROJECTS -->
+<div id="projects" class="page">
+  <h2 data-editable>My Projects</h2>
+  <p data-editable>coming soon...</p>
+</div>
 
-    </div>
+<script>
 
-    <script>
-        // Initialize Icons
-        lucide.createIcons();
+/* PASSCODES */
+const BLOGGER = "7425020630";
+const GOD = "anirudhisstraight";
 
-        // Simple Routing
-        function showSection(id) {
-            // Hide all sections
-            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-            // Remove active class from nav
-            document.querySelectorAll('#main-nav a').forEach(a => a.classList.remove('active'));
-            
-            // Show target
-            document.getElementById(id).classList.add('active');
-            // Set nav active
-            document.querySelector(`a[href="#${id}"]`).classList.add('active');
-            
-            window.scrollTo(0, 0);
-        }
-    </script>
+/* STATE */
+let access = localStorage.getItem("access") || "guest";
+let posts = JSON.parse(localStorage.getItem("posts") || "[]");
+let showPrivate = true;
+
+/* NAV */
+function showPage(id) {
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+/* UNLOCK */
+function unlock() {
+  const val = document.getElementById("pass").value;
+
+  if(val === BLOGGER){
+    access = "blogger";
+  } else if(val === GOD){
+    access = "god";
+  } else {
+    alert("wrong passcode");
+    return;
+  }
+
+  localStorage.setItem("access", access);
+  applyAccess();
+}
+
+/* APPLY ACCESS */
+function applyAccess(){
+
+  // create box
+  document.getElementById("createBox").style.display =
+    (access !== "guest") ? "block" : "none";
+
+  // god mode
+  if(access === "god"){
+    document.body.classList.add("god-mode");
+    document.querySelectorAll("[data-editable]").forEach(el=>{
+      el.contentEditable = true;
+    });
+  } else {
+    document.body.classList.remove("god-mode");
+    document.querySelectorAll("[data-editable]").forEach(el=>{
+      el.contentEditable = false;
+    });
+  }
+
+  render();
+}
+
+/* POSTS */
+function addPost(){
+  const t = document.getElementById("title").value;
+  const b = document.getElementById("body").value;
+  const p = document.getElementById("private").checked;
+
+  if(!t || !b) return alert("fill fields");
+
+  posts.unshift({
+    id: Date.now(),
+    title:t,
+    body:b,
+    private:p,
+    date:new Date().toLocaleDateString()
+  });
+
+  localStorage.setItem("posts", JSON.stringify(posts));
+  render();
+}
+
+/* RENDER */
+function render(){
+  const el = document.getElementById("posts");
+  el.innerHTML = "";
+
+  posts.forEach(post=>{
+    if(post.private && access==="guest") return;
+    if(post.private && !showPrivate && access!=="guest") return;
+
+    const div = document.createElement("div");
+    div.className="blog-post";
+
+    div.innerHTML = `
+      <b>${post.title}</b> (${post.date})
+      <p>${post.body}</p>
+      ${access!=="guest" ? `<span class="delete-btn" onclick="del(${post.id})">delete</span>`:""}
+    `;
+
+    el.appendChild(div);
+  });
+}
+
+/* DELETE */
+function del(id){
+  posts = posts.filter(p=>p.id!==id);
+  localStorage.setItem("posts", JSON.stringify(posts));
+  render();
+}
+
+/* TOGGLE PRIVATE */
+function togglePrivate(){
+  showPrivate = !showPrivate;
+  render();
+}
+
+/* LOGOUT */
+function logout(){
+  access="guest";
+  localStorage.setItem("access","guest");
+  applyAccess();
+}
+
+/* INIT */
+applyAccess();
+
+</script>
+
 </body>
-  </html>
-
+</html>
