@@ -1,224 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>anrdh86 — portfolio</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
 <style>
-body {
-  background:#000;
-  color:#fff;
-  font-family:'JetBrains Mono', monospace;
-  margin:0;
-}
+  :root {
+    --black: #000000;
+    --charcoal: #121212;
+    --border: #2a2a2a;
+    --muted: #555555;
+    --dim: #888888;
+    --white: #ffffff;
+    --accent: #00f2ff;
+  }
 
-/* NAV */
-nav {
-  display:flex;
-  gap:20px;
-  padding:15px;
-  border-bottom:1px solid #222;
-}
-nav button {
-  background:none;
-  border:none;
-  color:#888;
-  cursor:pointer;
-}
-nav button.active { color:#fff; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
 
-/* PAGES */
-.page { display:none; padding:20px; }
-.page.active { display:block; }
+  /* --- GOD MODE STYLES --- */
+  .god-mode-active { border: 2px solid var(--white) !important; animation: flash 0.5s ease; }
+  @keyframes flash { 0% { background: white; } 100% { background: black; } }
+  [contenteditable="true"] { outline: 1px dashed var(--muted); padding: 2px; cursor: text; }
+  [contenteditable="true"]:hover { outline: 1px solid var(--white); }
 
-/* BLOG */
-.blog-post {
-  border-bottom:1px solid #222;
-  padding:15px 0;
-}
-button { cursor:pointer; }
+  /* --- UI ELEMENTS --- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(0,0,0,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border); display: flex;
+    align-items: center; padding: 0 2rem; height: 52px;
+  }
+  .nav-brand { font-family: 'Playfair Display', serif; cursor: pointer; }
+  .nav-tab { font-size: 11px; text-transform: uppercase; color: var(--muted); padding: 0 1.25rem; height: 52px; cursor: pointer; border-bottom: 1px solid transparent; }
+  .nav-tab.active { color: var(--white); border-bottom-color: var(--white); }
+  
+  .page { display: none; padding-top: 52px; min-height: 100vh; }
+  .page.active { display: block; }
+  .section-wrap { max-width: 780px; margin: 0 auto; padding: 4rem 2rem; }
 
-/* GOD MODE */
-body.god-mode [data-editable] {
-  outline:1px dashed #555;
-}
-.delete-btn {
-  margin-left:10px;
-  color:red;
-  cursor:pointer;
-}
+  /* Admin Panels */
+  .admin-panel { background: var(--charcoal); border: 1px solid var(--border); padding: 20px; margin-bottom: 2rem; display: none; }
+  .input-field { background: #000; border: 1px solid var(--border); color: #fff; width: 100%; padding: 10px; margin-bottom: 10px; outline: none; }
+  
+  /* Projects & Blogs */
+  .item-card { border-bottom: 1px solid var(--border); padding: 2rem 0; position: relative; }
+  .tag { font-size: 9px; border: 1px solid var(--border); padding: 2px 6px; color: var(--muted); text-transform: uppercase; margin-right: 5px; }
+  
+  /* Grain Overlay */
+  body::after { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,..."); opacity: 0.02; pointer-events: none; z-index: 999; }
 </style>
 </head>
-
-<body>
+<body id="body-main">
 
 <nav>
-  <button onclick="showPage('home')" class="active">Home</button>
-  <button onclick="showPage('blog')">Blog</button>
-  <button onclick="showPage('projects')">Projects</button>
-  <button onclick="logout()">Logout</button>
+  <span class="nav-brand" onclick="triggerAuth()">anrdh86</span>
+  <div class="flex ml-auto">
+    <button class="nav-tab active" onclick="showPage('home')">Home</button>
+    <button class="nav-tab" onclick="showPage('blog')">मेरी फीकी जिंदगी</button>
+    <button class="nav-tab" onclick="showPage('projects')">Me & Laptop</button>
+  </div>
 </nav>
 
-<!-- HOME -->
-<div id="home" class="page active">
-  <h1 data-editable>Anirudh</h1>
-  <p data-editable>builder of things.</p>
-</div>
-
-<!-- BLOG -->
-<div id="blog" class="page">
-
-  <!-- Unlock -->
-  <input id="pass" placeholder="enter passcode">
-  <button onclick="unlock()">Unlock</button>
-
-  <!-- Create -->
-  <div id="createBox" style="display:none;">
-    <input id="title" placeholder="title"><br><br>
-    <textarea id="body" placeholder="write..."></textarea><br>
-    <label><input type="checkbox" id="private"> Private</label><br>
-    <button onclick="addPost()">Post</button>
+<div id="page-home" class="page active">
+  <div class="section-wrap">
+    <h1 class="text-6xl font-serif mb-6 editable" id="user-name">anrdh86</h1>
+    <p class="hero-bio editable text-dim" id="user-bio">Builder of quiet things. Shipping Petal Media. Developer & Dreamer.</p>
+    
+    <div class="mt-12 space-y-4" id="social-links">
+      </div>
   </div>
-
-  <!-- Toggle -->
-  <button onclick="togglePrivate()">Toggle Private</button>
-
-  <div id="posts"></div>
-
 </div>
 
-<!-- PROJECTS -->
-<div id="projects" class="page">
-  <h2 data-editable>My Projects</h2>
-  <p data-editable>coming soon...</p>
+<div id="page-blog" class="page">
+  <div class="section-wrap">
+    <h2 class="text-4xl font-serif mb-2">मेरी फीकी जिंदगी</h2>
+    <p class="text-muted text-xs uppercase tracking-widest mb-8">Public & Private Wiki</p>
+
+    <div id="admin-blog-panel" class="admin-panel">
+        <h4 class="text-white mb-4">New Blog Entry</h4>
+        <input type="text" id="blog-title" placeholder="Entry Title" class="input-field">
+        <textarea id="blog-content" placeholder="Content (Markdown/Text)" class="input-field h-32"></textarea>
+        <select id="blog-type" class="input-field">
+            <option value="public">Public</option>
+            <option value="private">Private</option>
+        </select>
+        <button onclick="saveBlog()" class="bg-white text-black px-4 py-2 text-xs font-bold uppercase">Publish Entry</button>
+    </div>
+
+    <div id="blog-list" class="space-y-6"></div>
+  </div>
 </div>
+
+<div id="page-projects" class="page">
+  <div class="section-wrap">
+    <h2 class="text-4xl font-serif mb-8">Me & My Laptop</h2>
+
+    <div id="admin-project-panel" class="admin-panel">
+        <h4 class="text-white mb-4">Upload New Project</h4>
+        <input type="text" id="proj-name" placeholder="Project Name (e.g. Config-Engine)" class="input-field">
+        <input type="text" id="proj-stack" placeholder="Tech Stack" class="input-field">
+        <textarea id="proj-desc" placeholder="Description" class="input-field h-24"></textarea>
+        <button onclick="saveProject()" class="bg-white text-black px-4 py-2 text-xs font-bold uppercase">Add to Portfolio</button>
+    </div>
+
+    <div id="project-list"></div>
+  </div>
+</div>
+
+<button id="god-save-btn" onclick="saveGodModeChanges()" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-white text-black px-10 py-4 font-bold uppercase text-xs z-[1000] hidden">Save Global Changes</button>
 
 <script>
+  let godMode = false;
+  let uploaderMode = false;
 
-/* PASSCODES */
-const BLOGGER = "7425020630";
-const GOD = "anirudhisstraight";
+  // INITIAL DATA
+  let state = JSON.parse(localStorage.getItem('anrdh86_state')) || {
+    name: "anrdh86",
+    bio: "Builder of quiet things. Shipping Petal Media. Developer & Dreamer.",
+    blogs: [{title: "Hello World", content: "This is my first pale entry.", type: "public", date: "2026-04-06"}],
+    projects: [{name: "Petal Media", stack: "React, CSS", desc: "Digital love pages for couples."}]
+  };
 
-/* STATE */
-let access = localStorage.getItem("access") || "guest";
-let posts = JSON.parse(localStorage.getItem("posts") || "[]");
-let showPrivate = true;
-
-/* NAV */
-function showPage(id) {
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-}
-
-/* UNLOCK */
-function unlock() {
-  const val = document.getElementById("pass").value;
-
-  if(val === BLOGGER){
-    access = "blogger";
-  } else if(val === GOD){
-    access = "god";
-  } else {
-    alert("wrong passcode");
-    return;
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    event.currentTarget.classList.add('active');
   }
 
-  localStorage.setItem("access", access);
-  applyAccess();
-}
+  function triggerAuth() {
+    const code = prompt("Enter Access Code:");
+    if (code === "7425020630") {
+        uploaderMode = true;
+        document.querySelectorAll('.admin-panel').forEach(p => p.style.display = 'block');
+        alert("Uploader Mode Active.");
+    } else if (code === "anirudhisstraight") {
+        enableGodMode();
+    }
+  }
 
-/* APPLY ACCESS */
-function applyAccess(){
+  function enableGodMode() {
+    godMode = true;
+    document.getElementById('body-main').classList.add('god-mode-active');
+    document.querySelectorAll('.editable').forEach(el => el.contentEditable = true);
+    document.getElementById('god-save-btn').style.display = 'block';
+    alert("GOD MODE ACTIVE: Click any text to edit.");
+  }
 
-  // create box
-  document.getElementById("createBox").style.display =
-    (access !== "guest") ? "block" : "none";
+  function saveGodModeChanges() {
+    state.name = document.getElementById('user-name').innerText;
+    state.bio = document.getElementById('user-bio').innerText;
+    localStorage.setItem('anrdh86_state', JSON.stringify(state));
+    alert("All changes saved to your machine.");
+    location.reload();
+  }
 
-  // god mode
-  if(access === "god"){
-    document.body.classList.add("god-mode");
-    document.querySelectorAll("[data-editable]").forEach(el=>{
-      el.contentEditable = true;
-    });
-  } else {
-    document.body.classList.remove("god-mode");
-    document.querySelectorAll("[data-editable]").forEach(el=>{
-      el.contentEditable = false;
-    });
+  function saveBlog() {
+    const title = document.getElementById('blog-title').value;
+    const content = document.getElementById('blog-content').value;
+    const type = document.getElementById('blog-type').value;
+    state.blogs.unshift({title, content, type, date: new Date().toLocaleDateString()});
+    render();
+  }
+
+  function saveProject() {
+    const name = document.getElementById('proj-name').value;
+    const stack = document.getElementById('proj-stack').value;
+    const desc = document.getElementById('proj-desc').value;
+    state.projects.unshift({name, stack, desc});
+    render();
+  }
+
+  function render() {
+    localStorage.setItem('anrdh86_state', JSON.stringify(state));
+    
+    // Render Blogs
+    const bList = document.getElementById('blog-list');
+    bList.innerHTML = state.blogs.map(b => `
+        <div class="item-card ${b.type === 'private' ? 'opacity-40' : ''}">
+            <span class="tag">${b.type}</span> <span class="text-[10px] text-muted">${b.date}</span>
+            <h3 class="text-xl font-serif mt-2">${b.title}</h3>
+            <p class="text-dim text-xs mt-2">${b.content}</p>
+        </div>
+    `).join('');
+
+    // Render Projects
+    const pList = document.getElementById('project-list');
+    pList.innerHTML = state.projects.map(p => `
+        <div class="item-card">
+            <h3 class="text-2xl font-serif">${p.name}</h3>
+            <div class="my-2"><span class="tag">${p.stack}</span></div>
+            <p class="text-dim text-xs">${p.desc}</p>
+        </div>
+    `).join('');
   }
 
   render();
-}
-
-/* POSTS */
-function addPost(){
-  const t = document.getElementById("title").value;
-  const b = document.getElementById("body").value;
-  const p = document.getElementById("private").checked;
-
-  if(!t || !b) return alert("fill fields");
-
-  posts.unshift({
-    id: Date.now(),
-    title:t,
-    body:b,
-    private:p,
-    date:new Date().toLocaleDateString()
-  });
-
-  localStorage.setItem("posts", JSON.stringify(posts));
-  render();
-}
-
-/* RENDER */
-function render(){
-  const el = document.getElementById("posts");
-  el.innerHTML = "";
-
-  posts.forEach(post=>{
-    if(post.private && access==="guest") return;
-    if(post.private && !showPrivate && access!=="guest") return;
-
-    const div = document.createElement("div");
-    div.className="blog-post";
-
-    div.innerHTML = `
-      <b>${post.title}</b> (${post.date})
-      <p>${post.body}</p>
-      ${access!=="guest" ? `<span class="delete-btn" onclick="del(${post.id})">delete</span>`:""}
-    `;
-
-    el.appendChild(div);
-  });
-}
-
-/* DELETE */
-function del(id){
-  posts = posts.filter(p=>p.id!==id);
-  localStorage.setItem("posts", JSON.stringify(posts));
-  render();
-}
-
-/* TOGGLE PRIVATE */
-function togglePrivate(){
-  showPrivate = !showPrivate;
-  render();
-}
-
-/* LOGOUT */
-function logout(){
-  access="guest";
-  localStorage.setItem("access","guest");
-  applyAccess();
-}
-
-/* INIT */
-applyAccess();
-
 </script>
-
 </body>
-</html>
+          </html>
+          
