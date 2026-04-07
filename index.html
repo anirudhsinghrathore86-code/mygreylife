@@ -1,283 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>anrdh86 — portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root {
-            --black: #000000;
-            --charcoal: #121212;
-            --border: #2a2a2a;
-            --muted: #555555;
-            --dim: #888888;
-            --white: #ffffff;
-        }
-
-        /* Essential Fix for White Screen */
-        html, body { background-color: var(--black) !important; color: var(--white); margin: 0; padding: 0; }
-
-        body {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-            line-height: 1.7;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-
-        /* --- ACCESS MODES --- */
-        .god-mode-active { border: 4px solid var(--white) !important; }
-        [contenteditable="true"] { outline: 1px dashed var(--muted); padding: 4px; cursor: text; }
-        [contenteditable="true"]:focus { outline: 1px solid var(--white); background: #0a0a0a; }
-
-        /* --- NAVIGATION --- */
-        nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            background: rgba(0,0,0,0.95); backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border); display: flex;
-            align-items: center; padding: 0 2rem; height: 52px;
-        }
-        .nav-brand { font-family: 'Playfair Display', serif; font-size: 16px; cursor: pointer; font-weight: 700; }
-        .nav-tab { font-size: 11px; text-transform: uppercase; color: var(--muted); padding: 0 1.2rem; cursor: pointer; transition: 0.2s; border: none; background: none; }
-        .nav-tab.active { color: var(--white); border-bottom: 1px solid var(--white); }
-
-        /* --- LAYOUT --- */
-        .page { display: none; padding-top: 80px; min-height: 100vh; }
-        .page.active { display: block; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .section-wrap { max-width: 800px; margin: 0 auto; padding: 2rem; }
-
-        /* --- UI COMPONENTS --- */
-        .admin-panel { background: var(--charcoal); border: 1px solid var(--border); padding: 25px; margin-bottom: 3rem; display: none; }
-        .input-field { background: #000; border: 1px solid var(--border); color: #fff; width: 100%; padding: 12px; margin-bottom: 12px; outline: none; font-family: inherit; }
-        .item-card { border-bottom: 1px solid var(--border); padding: 2.5rem 0; position: relative; }
-        .tag { font-size: 9px; border: 1px solid var(--border); padding: 3px 8px; color: var(--muted); text-transform: uppercase; margin-right: 8px; }
-        .btn-action { background: var(--white); color: #000; padding: 8px 16px; font-weight: 700; font-size: 10px; text-transform: uppercase; cursor: pointer; border: none; }
-        
-        .social-item { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--border); }
-        .del-btn { color: #ff4444; font-size: 10px; border: 1px solid #ff4444; padding: 2px 6px; margin-left: 10px; transition: 0.2s; }
-        .del-btn:hover { background: #ff4444; color: white; }
-
-        /* Grain Overlay */
-        body::after { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 999; }
-    </style>
+    <title>Blog | Petal Media</title>
 </head>
-<body id="body-main">
+<body class="bg-gray-50 text-gray-900 font-sans">
 
-<nav>
-    <span class="nav-brand" onclick="authGate()">anrdh86</span>
-    <div class="ml-auto flex">
-        <button class="nav-tab active" onclick="showPage('home', this)">Home</button>
-        <button class="nav-tab" onclick="showPage('blog', this)">मेरी फीकी जिंदगी</button>
-        <button class="nav-tab" onclick="showPage('projects', this)">Me & Laptop</button>
-    </div>
-</nav>
-
-<div id="page-home" class="page active">
-    <div class="section-wrap">
-        <div class="flex flex-col items-center text-center mb-12">
-            <img id="display-pfp" src="" class="w-32 h-32 rounded-full border-2 border-border mb-6 object-cover bg-charcoal">
-            <input type="text" id="god-pfp-input" placeholder="Paste New PFP URL..." class="input-field hidden w-64 text-center mt-2">
-            <h1 id="display-name" class="text-6xl font-serif mb-4 editable">anrdh86</h1>
-            <p id="display-bio" class="text-dim max-w-md editable">Builder of quiet things.</p>
+    <nav class="p-6 bg-white shadow-sm flex justify-between items-center">
+        <div class="text-2xl font-bold text-pink-600">Petal Media</div>
+        <div class="space-x-6">
+            <a href="#" class="hover:text-pink-600 transition">Services</a>
+            <a href="#" class="font-semibold text-pink-600 border-b-2 border-pink-600">Blog</a>
+            <a href="#" class="hover:text-pink-600 transition">Contact</a>
         </div>
+    </nav>
 
-        <div id="god-social-controls" class="hidden mb-6 flex justify-center border-t border-border pt-6">
-            <button onclick="addSocial()" class="btn-action">Add Social Handle +</button>
-        </div>
-        
-        <div id="social-list" class="mt-4"></div>
-    </div>
-</div>
+    <header class="py-16 px-6 text-center bg-pink-50">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4">The Bloom Blog</h1>
+        <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+            Tips, stories, and inspiration for creating the perfect digital tribute to your relationship.
+        </p>
+    </header>
 
-<div id="page-blog" class="page">
-    <div class="section-wrap">
-        <h2 class="text-4xl font-serif mb-8">मेरी फीकी जिंदगी</h2>
-        
-        <div id="admin-blog-panel" class="admin-panel">
-            <h4 class="text-xs uppercase tracking-widest mb-4">New Entry</h4>
-            <input type="text" id="blog-title" placeholder="Entry Title" class="input-field">
-            <textarea id="blog-content" placeholder="Content..." class="input-field h-32"></textarea>
-            <select id="blog-type" class="input-field">
-                <option value="public">Public Wiki</option>
-                <option value="private">Private Journal</option>
-            </select>
-            <button onclick="saveNewBlog()" class="btn-action">Publish Entry</button>
-        </div>
-
-        <div id="blog-list"></div>
-    </div>
-</div>
-
-<div id="page-projects" class="page">
-    <div class="section-wrap">
-        <h2 class="text-4xl font-serif mb-8">Me & My Laptop</h2>
-
-        <div id="admin-project-panel" class="admin-panel">
-            <h4 class="text-xs uppercase tracking-widest mb-4">Upload Project</h4>
-            <input type="text" id="proj-name" placeholder="Project Name" class="input-field">
-            <input type="text" id="proj-stack" placeholder="Tech Stack (e.g. React, Python)" class="input-field">
-            <textarea id="proj-desc" placeholder="Description" class="input-field h-24"></textarea>
-            <button onclick="saveNewProject()" class="btn-action">Add to Laptop</button>
-        </div>
-
-        <div id="project-list"></div>
-    </div>
-</div>
-
-<button id="god-save-btn" onclick="saveAllChanges()" class="fixed bottom-10 left-1/2 -translate-x-1/2 btn-action px-12 py-4 hidden z-[1000] border-2 border-black">Save Global Changes</button>
-
-<script>
-    let isGod = false;
-    let isUploader = false;
-
-    // --- INITIAL DATA STATE ---
-    const defaultData = {
-        name: "anrdh86",
-        bio: "builder of quiet things. shipping Petal Media. developer & dreamer.",
-        pfp: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=400",
-        socials: [
-            { platform: "GitHub", handle: "anrdh86", url: "#" },
-            { platform: "Instagram", handle: "@anrdh86", url: "#" }
-        ],
-        blogs: [{ title: "First Entry", content: "Welcome to my pale life wiki.", type: "public", date: "2026-04-06" }],
-        projects: [{ name: "Config-Engine", stack: "AI, React", desc: "Autonomous playtesting bots for digital environments." }]
-    };
-
-    let state = JSON.parse(localStorage.getItem('anrdh_vault')) || defaultData;
-
-    function authGate() {
-        const key = prompt("Enter Access Key:");
-        if (key === "7425020630") {
-            isUploader = true;
-            document.querySelectorAll('.admin-panel').forEach(p => p.style.display = 'block');
-            renderAll();
-            alert("Uploader Access Granted.");
-        } else if (key === "anirudhisstraight") {
-            enableGodMode();
-        }
-    }
-
-    function enableGodMode() {
-        isGod = true;
-        document.getElementById('body-main').classList.add('god-mode-active');
-        document.getElementById('god-save-btn').style.display = 'block';
-        document.getElementById('god-social-controls').classList.remove('hidden');
-        document.getElementById('god-pfp-input').classList.remove('hidden');
-        document.querySelectorAll('.editable').forEach(el => el.contentEditable = true);
-        renderAll();
-        alert("GOD MODE: Every text is live. Every link is deletable.");
-    }
-
-    function showPage(id, btn) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-        document.getElementById('page-' + id).classList.add('active');
-        btn.classList.add('active');
-    }
-
-    // --- SAVE & DELETE ACTIONS ---
-    function saveNewBlog() {
-        const title = document.getElementById('blog-title').value;
-        const content = document.getElementById('blog-content').value;
-        const type = document.getElementById('blog-type').value;
-        if(!title || !content) return alert("Fill in title and content.");
-        state.blogs.unshift({ title, content, type, date: new Date().toLocaleDateString() });
-        renderAll();
-        document.getElementById('blog-title').value = '';
-        document.getElementById('blog-content').value = '';
-    }
-
-    function saveNewProject() {
-        const name = document.getElementById('proj-name').value;
-        const stack = document.getElementById('proj-stack').value;
-        const desc = document.getElementById('proj-desc').value;
-        if(!name) return alert("Enter project name.");
-        state.projects.unshift({ name, stack, desc });
-        renderAll();
-        document.getElementById('proj-name').value = '';
-        document.getElementById('proj-desc').value = '';
-    }
-
-    function addSocial() {
-        const platform = prompt("Platform:");
-        const handle = prompt("Handle:");
-        const url = prompt("URL:");
-        if(platform && handle) {
-            state.socials.push({ platform, handle, url });
-            renderAll();
-        }
-    }
-
-    function deleteSocial(index) {
-        if(confirm("Delete social handle?")) { state.socials.splice(index, 1); renderAll(); }
-    }
-
-    function deleteBlog(index) {
-        if(confirm("Delete blog entry?")) { state.blogs.splice(index, 1); renderAll(); }
-    }
-
-    function deleteProject(index) {
-        if(confirm("Remove project?")) { state.projects.splice(index, 1); renderAll(); }
-    }
-
-    function saveAllChanges() {
-        state.name = document.getElementById('display-name').innerText;
-        state.bio = document.getElementById('display-bio').innerText;
-        const newPfp = document.getElementById('god-pfp-input').value;
-        if(newPfp) state.pfp = newPfp;
-        localStorage.setItem('anrdh_vault', JSON.stringify(state));
-        location.reload();
-    }
-
-    // --- RENDER ENGINE ---
-    function renderAll() {
-        localStorage.setItem('anrdh_vault', JSON.stringify(state));
-        
-        // Home
-        document.getElementById('display-name').innerText = state.name;
-        document.getElementById('display-bio').innerText = state.bio;
-        document.getElementById('display-pfp').src = state.pfp;
-
-        // Socials
-        document.getElementById('social-list').innerHTML = state.socials.map((s, i) => `
-            <div class="social-item">
-                <a href="${s.url}" target="_blank" class="flex-1 no-underline"><span class="text-muted text-[10px] uppercase mr-10">${s.platform}</span> ${s.handle}</a>
-                ${isGod ? `<button onclick="deleteSocial(${i})" class="del-btn">DEL</button>` : ''}
-            </div>
-        `).join('');
-
-        // Blogs
-        document.getElementById('blog-list').innerHTML = state.blogs.map((b, i) => `
-            <div class="item-card ${b.type === 'private' && !isGod && !isUploader ? 'hidden' : ''} ${b.type === 'private' ? 'opacity-40' : ''}">
-                <div class="flex justify-between items-center">
-                    <div><span class="tag">${b.type}</span> <span class="text-[9px] text-muted">${b.date}</span></div>
-                    ${(isGod || isUploader) ? `<button onclick="deleteBlog(${i})" class="del-btn">DELETE</button>` : ''}
+    <main class="max-w-6xl mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <article class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+                <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800" alt="Wedding" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <span class="text-pink-500 text-sm font-semibold uppercase">Inspiration</span>
+                    <h2 class="text-xl font-bold mt-2 mb-3">5 Reasons to Create a Custom Webpage for Your Anniversary</h2>
+                    <p class="text-gray-600 text-sm mb-4">Forget cards. A digital experience is a lasting way to celebrate your unique love story.</p>
+                    <a href="#" class="text-pink-600 font-medium hover:underline">Read More →</a>
                 </div>
-                <h3 class="text-2xl font-serif mt-3">${b.title}</h3>
-                <p class="text-dim text-xs mt-3 whitespace-pre-wrap">${b.content}</p>
-            </div>
-        `).join('');
+            </article>
 
-        // Projects
-        document.getElementById('project-list').innerHTML = state.projects.map((p, i) => `
-            <div class="item-card">
-                <div class="flex justify-between items-center">
-                    <span class="tag">${p.stack}</span>
-                    ${(isGod || isUploader) ? `<button onclick="deleteProject(${i})" class="del-btn">REMOVE</button>` : ''}
+            <article class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=800" alt="Couple" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <span class="text-pink-500 text-sm font-semibold uppercase">Product Updates</span>
+                    <h2 class="text-xl font-bold mt-2 mb-3">Introducing the 'Rose' Tier: Premium Interactions</h2>
+                    <p class="text-gray-600 text-sm mb-4">Our new tier features interactive photo galleries and background music integration.</p>
+                    <a href="#" class="text-pink-600 font-medium hover:underline">Read More →</a>
                 </div>
-                <h3 class="text-2xl font-serif mt-3">${p.name}</h3>
-                <p class="text-dim text-xs mt-3">${p.desc}</p>
-            </div>
-        `).join('');
-    }
+            </article>
 
-    // Run on startup
-    renderAll();
-</script>
+            <article class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+                <img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&q=80&w=800" alt="Tech" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <span class="text-pink-500 text-sm font-semibold uppercase">Design</span>
+                    <h2 class="text-xl font-bold mt-2 mb-3">Minimalism in Digital Romance</h2>
+                    <p class="text-gray-600 text-sm mb-4">Why less is more when it comes to designing a web page for your significant other.</p>
+                    <a href="#" class="text-pink-600 font-medium hover:underline">Read More →</a>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="bg-white border-t py-10 mt-12 text-center">
+        <p class="text-gray-500">© 2026 Petal Media. Crafted with love.</p>
+    </footer>
+
 </body>
-</html>
+                        </html>
+                        
